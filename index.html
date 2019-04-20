@@ -94,7 +94,7 @@
         </div>
         <script type="text/javascript">
         document.querySelector('#js-input-DisplayName').addEventListener('input', function () {
-            document.querySelector('#js-DisplayName').innerHTML = document.querySelector('#js-input-DisplayName').value;
+            document.querySelector('#js-DisplayName').innerHTML = document.querySelector('#js-input-DisplayName').value | '{{输入名字}}';
         });
         </script>
         <div class="section" id="footer" style="text-align: center;">
