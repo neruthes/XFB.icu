@@ -86,7 +86,7 @@
                         </g>
                     </svg>
                 </div>
-                <h1 style="text-align: center;"><span id="js-DisplayName"></span>今天修福报了吗?<br></h1>
+                <h1 style="text-align: center;"><span id="js-DisplayName">{{名字}}</span>今天修福报了吗?<br></h1>
                 <div class="h1" style="font-size: 80px; text-align: center;">
                     修了
                 </div>
@@ -94,7 +94,7 @@
         </div>
         <script type="text/javascript">
         document.querySelector('#js-input-DisplayName').addEventListener('input', function () {
-            document.querySelector('#js-DisplayName').innerHTML = document.querySelector('#js-input-DisplayName').value | '{{输入名字}}';
+            document.querySelector('#js-DisplayName').innerHTML = document.querySelector('#js-input-DisplayName').value !== '' ? document.querySelector('#js-input-DisplayName').value : '{{名字}}';
         });
         </script>
         <div class="section" id="footer" style="text-align: center;">
