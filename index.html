@@ -35,13 +35,36 @@
             font-family: -apple-system, 'Helvetica Neue', 'Ubuntu', 'Open Sans', sans-serif, 'PingFang SC', 'Noto Sans CJK SC', 'Source Han Sans SC';
             font-size: 18px;
             color: #FFF;
-            background: #D03050;
+            background: #DE335E;
             padding: 0;
             margin: 0;
         }
+        body[data-fubao="修了"] { background: #DE335E; }
+        body[data-fubao="没修"] { background: #335EDE; }
         .section {
             padding: 60px 15px;
         }
+        /* Form */
+        .form-group {
+            padding: 10px 0;
+        }
+        .field-header {
+            display: inline-block;
+            width: 100px;
+        }
+        .field-body {
+            display: inline-block;
+            width: 180px;
+        }
+        #formgroup-fubao label {
+            display: inline-block;
+            padding: 0 20px 0 0;
+        }
+        #formgroup-fubao label > input[type="radio"] {
+            display: inline-block;
+            padding: 0 0 0 5px;
+        }
+        /* /Form */
         h1, .h1 {
             font-size: 24px;
             font-weight: 600;
@@ -50,24 +73,41 @@
         }
         </style>
     </head>
-    <body>
-        <div class="section" id="header" style="">
-            <div class="" style="font-size: 18px; text-align: center;">
-                <label>输入名字: <input type="text" id="js-input-DisplayName" style="
-                    font-size: 18px;
-                    line-height: 20px;
-                    box-shadow: none;
-                    border: none;
-                    border-radius: 4px;
-                    outline: none;
-                    height: 40px;
-                    width: 180px;
-                    padding: 10px 5px;
-                    margin: 0 0 0 10px;
-                " /></label>
-            </div>
-        </div>
-        <div class="section" id="main" style="background: #DE335E; height: 80vh; padding-top: 20vh;">
+    <body data-fubao="修了">
+        <header class="section" id="header" style="font-size: 18px; text-align: left; background: rgba(0, 0, 0, 0.1);">
+            <form class="" style="max-width: 280px; margin: 0 auto;">
+                <div class="form-group" style="">
+                    <label><span class="field-header">输入名字:</span><span class="field-body"><input type="text" id="js-input-DisplayName" style="
+                        font-size: 18px;
+                        line-height: 20px;
+                        box-shadow: none;
+                        border: none;
+                        border-radius: 4px;
+                        outline: none;
+                        height: 40px;
+                        width: 180px;
+                        padding: 10px 5px;
+                        margin: 0;
+                    " /></span></label>
+                </div>
+                <div class="form-group" style="" id="formgroup-fubao">
+                    <span class="field-header">今修福报:</span><span class="field-body">
+                        <label><input type="radio" name="fubao" value="修了" style="" checked /> 修了</label>
+                        <label><input type="radio" name="fubao" value="没修" style="" /> 没修</label>
+                    </span>
+                </div>
+                <script type="text/javascript">
+                document.querySelectorAll('[name="fubao"]').forEach(function (x) {
+                    x.addEventListener('change', function () {
+                        var xiulema = document.querySelector('form').elements.namedItem('fubao').value;
+                        document.body.setAttribute('data-fubao', xiulema);
+                        document.querySelector('#js-Fubao-DisplayStatus').innerHTML = xiulema;
+                    });
+                })
+                </script>
+            </form>
+        </header>
+        <div class="section" id="main" style="background: none; height: 80vh; padding-top: 20vh;">
             <div class="">
                 <div class="" style="text-align: center; padding: 0;">
                     <script type="text/javascript">
@@ -88,7 +128,7 @@
                 </div>
                 <h1 style="text-align: center;"><span id="js-DisplayName">{{名字}}</span>今天修福报了吗?<br></h1>
                 <div class="h1" style="font-size: 80px; text-align: center;">
-                    修了
+                    <span id="js-Fubao-DisplayStatus">修了</span>
                 </div>
             </div>
         </div>
@@ -97,7 +137,7 @@
             document.querySelector('#js-DisplayName').innerHTML = document.querySelector('#js-input-DisplayName').value !== '' ? document.querySelector('#js-input-DisplayName').value : '{{名字}}';
         });
         </script>
-        <div class="section" id="footer" style="text-align: center;">
+        <div class="section" id="footer" style="text-align: center; background: rgba(0, 0, 0, 0.1);">
             <div class="">
                 © 2019 XIUFUBAO.icu
             </div>
